@@ -6,12 +6,12 @@ import {
 
 import axios from 'axios';
 
+import { Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CheckBox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 
 import m from '../fotos/EsperandoMini.png';
@@ -22,12 +22,16 @@ export default function Mesa(argumentos) {
     const [seleccionPrimero, setSeleccionPrimero]=useState();
 
     const [segundos, setSegundos]=useState([]);
+    const [segundosCompletos, setSegundosCompletos]=useState([]);
     const [seleccionSegundo, setSeleccionSegundo]=useState();
+    
 
     const [postres, setPostres]=useState([]);
+    const [postresCompletos, setPostresCompletos]=useState([]);
     const [seleccionPostre, setSeleccionPostre]=useState();
 
     const [bebidas, setBebidas]=useState([]);
+    const [bebidasCompletos, setBebidassCompletos]=useState([]);
     const [seleccionBebida, setSeleccionBebida]=useState();
 
     useEffect(() => {
@@ -49,57 +53,66 @@ export default function Mesa(argumentos) {
 
         axios.get(`http://localhost:3053/platos/segundos`, {}).then((response) => {
             var lista = [];
+            var listaCompleta = [];
             response.data.forEach(element => {
                 lista.push(element.nombre);
+                listaCompleta.push(element);
             });
             setSegundos(lista);
+            setSegundosCompletos(listaCompleta);
         });
 
         axios.get(`http://localhost:3053/platos/postres`, {}).then((response) => {
             var lista = [];
+            var listaCompleta = [];
             response.data.forEach(element => {
                 lista.push(element.nombre);
+                listaCompleta.push(element);
             });
             setPostres(lista);
+            setPostresCompletos(listaCompleta);
         });
 
         axios.get(`http://localhost:3053/platos/bebidas`, {}).then((response) => {
             var lista = [];
+            var listaCompleta = [];
             response.data.forEach(element => {
                 lista.push(element.nombre);
+                listaCompleta.push(element);
             });
             setBebidas(lista);
+            setBebidassCompletos(listaCompleta);
         });
     }
 
     const primerPlato = (plato) => {
         primerosCompletos.forEach(element => {
             if(element.nombre === plato){
-                argumentos.primero(argumentos.posicion, element._id);
+                argumentos.primero(argumentos.posicion, element);
             }
         })
     }
 
     const segundoPlato = (plato) => {
-        primerosCompletos.forEach(element => {
+        segundosCompletos.forEach(element => {
             if(element.nombre === plato){
-                argumentos.segundo(argumentos.posicion, element._id);
+                argumentos.segundo(argumentos.posicion, element);
             }
         })
     }
 
     const postrePlato = (plato) => {
-        primerosCompletos.forEach(element => {
+        postresCompletos.forEach(element => {
             if(element.nombre === plato){
-                argumentos.postre(argumentos.posicion, element._id);
+                argumentos.postre(argumentos.posicion, element);
             }
         })
     }
 
     const bebidaElegida = (plato) => {
-        primerosCompletos.forEach(element => {
+        bebidasCompletos.forEach(element => {
             if(element.nombre === plato){
-                argumentos.bebida(argumentos.posicion, element._id);
+                argumentos.bebida(argumentos.posicion, element);
             }
         })
     }
@@ -108,81 +121,84 @@ export default function Mesa(argumentos) {
 
     return (        
     <Card
-        sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
+        sx={{height: '100%', display: 'flex', flexDirection: 'column'}} spacing={1}
     >
         <CardContent sx={{ flexGrow: 1 }} > 
             <Container
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
+                maxWidth="md"
+                
             >
-            {<img src={m} alt="Mesa"  />}
-            <Autocomplete
-                fullWidth
-                options={primeros}
-                autoHighlight
-                value={seleccionPrimero}
-                inputValue={seleccionPrimero}
-                onChange={(event, primero) => {
-                    setSeleccionPrimero(primero);
-                    primerPlato(primero);
-                }}
-                renderInput={(params) => <TextField {...params} label="Primero"/>}
-            />
+                <Grid container spacing={1}>
+                    {<img src={m} alt="Mesa"  />}
+                    <Autocomplete
+                        fullWidth
+                        options={primeros}
+                        autoHighlight
+                        value={seleccionPrimero}
+                        inputValue={seleccionPrimero}
+                        onChange={(event, primero) => {
+                            setSeleccionPrimero(primero);
+                            primerPlato(primero);
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Primero"/>}
+                    />
 
-            <Autocomplete
-                fullWidth
-                options={segundos}
-                value={seleccionSegundo}
-                inputValue={seleccionSegundo}
-                onChange={(event, segundo) => {
-                    setSeleccionSegundo(segundo);
-                    segundoPlato(segundo);
-                }}
-                renderInput={(params) => <TextField {...params} label="Segundo"/>}
-            />
+                    <Autocomplete
+                        fullWidth
+                        options={segundos}
+                        value={seleccionSegundo}
+                        inputValue={seleccionSegundo}
+                        onChange={(event, segundo) => {
+                            setSeleccionSegundo(segundo);
+                            segundoPlato(segundo);
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Segundo"/>}
+                    />
 
-            <Autocomplete
-                fullWidth
-                options={postres}
-                value={seleccionPostre}
-                inputValue={seleccionPostre}
-                onChange={(event, postre) => {
-                    setSeleccionPostre(postre);
-                    postrePlato(postre);
-                }}
-                renderInput={(params) => <TextField {...params} label="Postre"/>}
-            />
+                    <Autocomplete
+                        fullWidth
+                        options={postres}
+                        value={seleccionPostre}
+                        inputValue={seleccionPostre}
+                        onChange={(event, postre) => {
+                            setSeleccionPostre(postre);
+                            postrePlato(postre);
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Postre"/>}
+                    />
 
-            <FormControlLabel control={<CheckBox />} label="Pan"/>
+                    <Autocomplete
+                        fullWidth
+                        options={bebidas}
+                        value={seleccionBebida}
+                        inputValue={seleccionBebida}
+                        onChange={(event, bebida) => {
+                            setSeleccionBebida(bebida);
+                            bebidaElegida(bebida);
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Bebida"/>}
+                    />
 
-            <Autocomplete
-                fullWidth
-                options={bebidas}
-                value={seleccionBebida}
-                inputValue={seleccionBebida}
-                onChange={(event, bebida) => {
-                    setSeleccionBebida(bebida);
-                    bebidaElegida(bebida);
-                }}
-                renderInput={(params) => <TextField {...params} label="Bebida"/>}
-            />
+                    <TextField
+                        name="intolerancias"
+                        label="intolerancias"
+                        type="text"
+                        id="intolerancias"
+                    />
 
-            <TextField
-                name="intolerancias"
-                label="intolerancias"
-                type="text"
-                id="intolerancias"
-            />
+                    <TextField
+                    fullWidth
+                    name="aclaraciones"
+                    label="Aclaraciones"
+                    type="text"
+                    id="aclaraciones"
+                    />
 
-            <TextField
-              fullWidth
-              name="aclaraciones"
-              label="Aclaraciones"
-              type="text"
-              id="aclaraciones"
-            />
-
+                    <Typography align='center'> Pan incluido</Typography>
+                </Grid>
             </Container>
 
             

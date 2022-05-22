@@ -43,6 +43,7 @@ const theme = createTheme();
 export default function Album() {
     const camarero = sessionStorage.getItem('usuario');
     const [cardMesas, setCard]=useState([]);
+    const [admin, setAdmin]=useState([]);
 
     var url = `http://localhost:3053/${camarero}/mesas`;
 
@@ -51,6 +52,11 @@ export default function Album() {
 
     useEffect(() => {
         cargarMesas(); 
+        if(sessionStorage.getItem("admin") === "true"){
+            setAdmin(true);
+        }else{
+            setAdmin(false);
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -64,11 +70,14 @@ export default function Album() {
         });
     }
 
-    function comanda(nMesa, accion){
+    async function comanda(nMesa, accion){
         if(accion===1){
             tomarComanda(nMesa);
-        }else{
+        }else if(accion===2){
             verComanda(nMesa);
+        }else{
+            await borrarComanda(nMesa);
+            cargarMesas();
         }
     }
 
@@ -82,12 +91,47 @@ export default function Album() {
         navigate('/'+camarero+'/verComanda/'+nMesa);
     }
 
+    async function borrarComanda(nMesa){
+        axios.post('http://localhost:3053/'+camarero+'/liberar', {
+            mesa: nMesa,
+        }).then(response =>{
+            alert("Mesa " + nMesa + " queda libre");
+        });
+    }
+
     function color(nMesa){
         if(cardMesas[nMesa].libre===true){
             return "green";
         }else{
             return "darkred";
         }
+    }
+
+    function salir(){
+        sessionStorage.removeItem("admin");
+        sessionStorage.removeItem("usuario");
+        navigate('/login');
+    }
+
+    function administrar(){
+        navigate('/'+camarero+'/admin');
+    }
+
+    function administrador(){
+         return (
+            (admin) ? 
+                <Button variant="contained" 
+                    sx={{color: 'white', width: '50'}} 
+                    bqColor= "red" 
+                    onClick={() => {
+                        administrar()
+                    }} >
+                    Administrador
+                </Button>
+            :   
+                <Button>
+                </Button>
+        );
     }
 
 
@@ -97,11 +141,23 @@ export default function Album() {
             <AppBar position="relative">
                 <Toolbar>
                     <BoyIcon sx={{ mr: 2 }} />
-                    <Typography variant="h6" color="inherit" noWrap>
+                    <Typography variant="h6" color="inherit" sx={{width: 500}}>
                       Camarero que le atiende: {camarero}
                     </Typography>
-
-                <Button variant="contained" sx={{left: 80}}>Salir</Button>
+                    <Grid sx={{width: 500}}>
+                        <Container direction="column">
+                            {administrador()}
+                            <Button 
+                                variant="contained" 
+                                sx={{left: 80, color: "white"}}
+                                onClick={() => {
+                                    salir();
+                                }}
+                            >
+                                Salir
+                            </Button>
+                        </Container>
+                    </Grid>
               </Toolbar>
           </AppBar>
           <main>

@@ -38,11 +38,13 @@ export default function Mesa(argumentos) {
             <CardContent sx={{ flexGrow: 1 }}> 
                 <img src={m} alt="Mesa"  className={styles.foto}/>
                 <Typography className={styles.NMesa}>Mesa: {argumentos.mesa} </Typography>
-                <Typography className={styles.NMesa}>Comensales: {argumentos.comensales} </Typography>
+                {/*<Typography className={styles.NMesa}>Comensales: {argumentos.comensales} </Typography>*/}
             </CardContent>
             <CardActions className={styles.botones}>
                 {verComanda(argumentos.color)}
-                <Button sx={{color: 'white', width: '50'}} variant="contained">Mesa libre</Button>
+                <Button sx={{color: 'white', width: '50'}} variant="contained" onClick={() => {
+                        argumentos.comanda(argumentos.mesa, 3);
+                    }} >Mesa libre</Button>
             </CardActions>
         </Card>
     );

@@ -43,7 +43,7 @@ export default function Comanda() {
     const navigate = useNavigate();
     const camarero = sessionStorage.getItem('usuario');
 
-    var mesa = sessionStorage.getItem("mesa");
+    const mesa = sessionStorage.getItem("mesa");
 
     const personas = ["1", "2", "3", "4", "5", "6"];
 
@@ -54,30 +54,30 @@ export default function Comanda() {
     const [postres, setPostres]=useState([]);
     const [bebidas, setBebida]=useState([]);
 
-    async function handleSubmit(){
-        sessionStorage.removeItem("mesa");
-        await subeComanda();
-        
-
-
-        //navigate('/'+camarero+'/camarero/');
-
-        
-    }
-
     async function subeComanda(){
-        axios.post(`http://localhost:3053/platos/comanda`, {
+        //tipo de mesa
+        var mesaOcupada;
+        
+        await axios.put(`http://localhost:3053/${camarero}/mesas/${mesa}`, {
+        }).then(response => {
+            if(response.status===200){
+                mesaOcupada = response.data[0];
+            }else{
+                alert("Mesa no encontrada");
+            }
+        })
+
+        await axios.put(`http://localhost:3053/${camarero}/comandas/nueva`, {
             primeros: primeros,
             segundos: segundos,
             postres: postres,
             bebidas: bebidas,
-            mesa,
+            mesa: mesaOcupada
         }).then((response) => {
-
+            sessionStorage.removeItem("mesa");
+            navigate('/'+camarero+'/camarero/');
         });
-    }
-
-   
+    }   
 
     function comensales(numero){
         var gente  = [];
@@ -160,9 +160,6 @@ export default function Comanda() {
                                                 postre={postre}
                                                 bebida={bebida}
                                                 posicion={index}
-                                                /*tipo = {card.tipo}
-                                                servido={servidoPlato}
-                                                dservido={dservidoPrimeros}*/
                                             />
                                         </Grid>
                                 ))}

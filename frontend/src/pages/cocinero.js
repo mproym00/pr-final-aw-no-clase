@@ -23,7 +23,7 @@ import {
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import Component from '../components/mesa';
+import Component from '../components/platoCocina';
 
 function Copyright() {
     return (
@@ -41,29 +41,37 @@ function Copyright() {
 const theme = createTheme();
 
 export default function Album() {
-    const camarero = sessionStorage.getItem('usuario');
+    const cocinero = sessionStorage.getItem('usuario');
     const [cardMesas, setCard]=useState([]);
+    const [admin, setAdmin]=useState([]);
 
-    var url = `http://localhost:3053/${camarero}/mesas`;
+    const [comandasPlatos, setComandas]= useState([]);
 
-    var mesas;
+    var url = `http://localhost:3053/${cocinero}/mesas`;
+
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        cargarPlatos();
-        cargarMesas(); 
+        cargarDatos(); 
+        if(sessionStorage.getItem("admin") === "true"){
+            setAdmin(true);
+        }else{
+            setAdmin(false);
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    function cargarPlatos(){
-        axios.get(`${url}/platos`, {}).then((response) => {
-            mesas = response.data;
-            setCard(mesas);
-        });
+    const tipoUsuario = "cocinero";
+
+    async function cargarDatos(){
+        const platos =  await cargarComandas();
+        const mesas = await cargarMesas();
+
     }
 
-    const tipoUsuario = "cocinero";
-    function cargarMesas(){
+    async function cargarMesas(){
+        var mesas=[];
         axios.post(`${url}`, {
             tipo: tipoUsuario
         }).then((response) => {
@@ -72,23 +80,10 @@ export default function Album() {
         });
     }
 
-    function comanda(nMesa, accion){
-        if(accion===1){
-            tomarComanda(nMesa);
-        }else{
-            verComanda(nMesa);
-        }
+    async function cargarComandas(){
+        axios.get("http://localhost:3035/")
     }
 
-    function tomarComanda(nMesa){
-        sessionStorage.setItem("mesa", nMesa);
-        navigate('/'+camarero+'/comanda/'+nMesa);
-    }
-
-    function verComanda(nMesa){
-        sessionStorage.setItem("mesa", nMesa);
-        navigate('/'+camarero+'/verComanda/'+nMesa);
-    }
 
     function color(nMesa){
         if(cardMesas[nMesa].libre===true){
@@ -98,6 +93,33 @@ export default function Album() {
         }
     }
 
+    function salir(){
+        sessionStorage.removeItem("admin");
+        sessionStorage.removeItem("usuario");
+        navigate('/login');
+    }
+
+    function administrar(){
+        navigate('/'+cocinero+'/admin');
+    }
+
+    function administrador(){
+         return (
+            (admin) ? 
+                <Button variant="contained" 
+                    sx={{color: 'white', width: '50'}} 
+                    bqColor= "red" 
+                    onClick={() => {
+                        administrar()
+                    }} >
+                    Administrador
+                </Button>
+            :   
+                <Button>
+                </Button>
+        );
+    }
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -105,11 +127,23 @@ export default function Album() {
             <AppBar position="relative">
                 <Toolbar>
                     <BoyIcon sx={{ mr: 2 }} />
-                    <Typography variant="h6" color="inherit" noWrap>
-                      Camarero que le atiende: {camarero}
+                    <Typography variant="h6" color="inherit" sx={{width: 500}}>
+                      cocinero en faena: {cocinero}
                     </Typography>
-
-                <Button variant="contained" sx={{left: 80}}>Salir</Button>
+                    <Grid sx={{width: 500}}>
+                        <Container direction="column">
+                            {administrador()}
+                            <Button 
+                                variant="contained" 
+                                sx={{left: 80, color: "white"}}
+                                onClick={() => {
+                                    salir();
+                                }}
+                            >
+                                Salir
+                            </Button>
+                        </Container>
+                    </Grid>
               </Toolbar>
           </AppBar>
           <main>
@@ -129,7 +163,7 @@ export default function Album() {
                           color="text.primary"
                           gutterBottom
                       >
-                          COMEDOR 1
+                          COCINA
                       </Typography>
 
                       <Stack
@@ -147,11 +181,11 @@ export default function Album() {
                         <Grid item key={index} xs={12} sm={6} md={4}>
                             <Component
                                 mesa={card.numero}
-                                comensales={card.comensales}
+                                //comensales={card.comensales}
                                 index={index}
-                                comanda={comanda}
+                                //comanda={comanda}
                                 color ={color(index)}
-                                //edit={edit}
+
                             />
                         </Grid>
                     ))}

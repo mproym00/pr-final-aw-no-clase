@@ -55,7 +55,7 @@ export default function Comanda() {
 
     function handleSubmit(){
         sessionStorage.removeItem("mesa");
-        navigate(`${url}/camarero`);
+        navigate(`/${camarero}/camarero`);
     }
 
     const[personas, setPersonas]=useState(0);
@@ -65,19 +65,17 @@ export default function Comanda() {
     const [primeros, setPrimeros]=useState([]);
     const [segundos, setSegundos]=useState([]);
     const [postres, setPostres]=useState([]);
-    const [pan, setPan]=useState([]);
     const [bebida, setBebida]=useState([]);
 
 
     function cargarPlatos(){  
-        axios.post(`${url}/comanda`, {
+        axios.post(`${url}/comandas`, {
             mesa: mesa
         }).then((response) => {
             platos = response.data;
             var primeros=[];
             var segundos = [];
             var postres = [];
-            var pan = [];
             var bebidas = [];
             platos.forEach(element => { 
                 var nombre = element.plato[0].nombre;
@@ -87,8 +85,7 @@ export default function Comanda() {
                 if(element.plato[0].tipo === "Primero") primeros.push({nombre: nombre, estado: estado, color:color, id:id, tipo: "primero"});
                 else if(element.plato[0].tipo==="Segundo") segundos.push({nombre: nombre, estado: estado, color:color, id:id, tipo:"segundo"});
                 else if(element.plato[0].tipo==="Postre") postres.push({nombre: nombre, estado: estado, color:color, id:id, tipo: "postre"});
-                else if(element.plato[0].tipo==="Pan") postres.push({nombre: nombre, estado: estado, color:color, id:id, tipo: "pan"});
-                else if(element.plato[0].tipo==="Bebida") postres.push({nombre: nombre, estado: estado, color:color, id:id, tipo: "Bebida"});
+                else if(element.plato[0].tipo==="Bebida") bebidas.push({nombre: nombre, estado: estado, color:color, id:id, tipo: "Bebida"});
             });
             if(primeros.length > segundos.length) setPersonas(primeros.length);
             else setPersonas(segundos.length);
@@ -97,8 +94,7 @@ export default function Comanda() {
             setPrimeros(primeros);
             setSegundos(segundos);
             setPostres(postres);
-            setPan(pan);
-            setBebida(bebida);
+            setBebida(bebidas);
         });
     }
 
@@ -122,12 +118,11 @@ export default function Comanda() {
         if(tipo==="primero") array=primeros;
         else if(tipo==="segundo") array=segundos;
         else if(tipo==="postre") array=postres;
-        else if(tipo==="pan") array=pan;
         else if(tipo==="bebida") array=bebida;
 
 
         const id = array[index].id;
-        axios.put(`${url}/comanda/${id}/+`, {
+        axios.put(`${url}/comandas/modificar/${id}/+`, {
         }).then((response) => {
             if(response.status===200){
                 cargarPlatos();
@@ -140,7 +135,7 @@ export default function Comanda() {
 
     function dservidoPrimeros(index){
         const id = primeros[index].id;
-        axios.put(`${url}/comanda/${id}/-`, {
+        axios.put(`${url}/comandas/${id}/-`, {
         }).then((response) => {
             if(response.status===200){
                 cargarPlatos();
@@ -263,33 +258,6 @@ export default function Comanda() {
                                     ))}
                                 </Grid>
                             </Container>
-
-
-                            <Typography
-                                component="h1"
-                                variant="h4"
-                                align="left"
-                                color="text.primary"
-                                gutterBottom
-                            >
-                                Pan:
-                            </Typography>
-
-                            <Container sx={{ py: 8 }} maxWidth="md">
-                                <Grid container spacing={1}>
-                                    {pan.map((card, index) => (
-                                        <Grid item key={index}  md={40}>
-                                            <Component
-                                                nombrePlato={card.nombre}
-                                                estado = {card.color}
-                                                tipo = {card.tipo}
-                                                servido={servidoPlato}
-                                            />
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            </Container>
-
 
                             <Typography
                                 component="h1"
