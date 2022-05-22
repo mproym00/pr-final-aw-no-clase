@@ -28,9 +28,6 @@ if(process.env.NODE_ENV === "production"){
     });
 }
 
-/*const PORT = process.env.PORT || 3053;
-app.listen(PORT, () => console.log("Puerto escuchado el 3053"));*/
 
-app.listen(3053, function(){
-    console.log("Puerto en el 3053, vayan pasando");
-})
+const PORT = process.env.PORT || 3053;
+app.listen(PORT, () => console.log("Puerto escuchado el 3053"));
