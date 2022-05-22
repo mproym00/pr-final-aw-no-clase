@@ -14,6 +14,9 @@ import Comanda from './pages/comanda.js';
 import Entrada from './pages/entrada.js';
 import Login from './pages/login.js';
 import VerComanda from './pages/verComanda.js';
+import NuevoIngrediente from './pages/nuevoIngrediente';
+import NuevoPlato from './pages/nuevoPlato';
+import NuevoUser from './pages/nuevoUser';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
             <Route path="/:user/verComanda/:mesa" element={<VerComanda/>}/>
             <Route path="/:user/cocinero" element={<Cocinero/>}/>
             <Route path="/:user/admin" element={<Admin/>}/>
+            <Route path="/user/admin/nuevoIngrediente" element={<NuevoIngrediente/>}/>
+            <Route path="/user/admin/nuevoPlato" element={<NuevoPlato/>}/>
+            <Route path="/user/admin/nuevoUser" element={<NuevoUser/>}/>
 
         </Routes>
       </div>

@@ -5,7 +5,7 @@ import {
 } from 'react';
 
 import axios from 'axios';
-
+import Grid from '@mui/material/Grid';
 import Autocomplete from '@mui/material/Autocomplete';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -18,6 +18,7 @@ export default function Mesa(argumentos) {
     const [ingredientes, setIngredientes]=useState([]);
     const [ingredientesCompletos, setIngredientesCompletos]=useState([]);
     const [seleccionIngrediente, setSeleccionIngrediente]=useState();
+    
 
     useEffect(() => {
         cargarIngredientes();
