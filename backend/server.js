@@ -14,9 +14,11 @@ app.use(cors());
 app.use('/login', require('./routes/login'));
 app.use('/:camarero/mesas', require('./routes/mesas'));
 app.use('/:camarero/mesas/:mesa',  require('./routes/mesas'));
+
 app.use('/platos', require('./routes/platos'));
-app.use('/:camarero/comanda/:idPlato/:op', require('./routes/platos'));
-app.use('/:camarero/comanda', require('./routes/comandas'));
+app.use('/:camarero/comandas/modificar/:idPlato/:op', require('./routes/comandas'));
+app.use('/:camarero/comandas', require('./routes/comandas'));
+app.use('/:camarero/liberar', require('./routes/liberarMesa'));
 
 if(process.env.NODE_ENV === "production"){
     app.use(express.static("../frontend/build"));

@@ -4,6 +4,14 @@ const mesas = require('../models/mesas');
 const platos = require('../models/platos');
 const comanda = require('../models/comandas');
 
+const {ObjectID} = require('mongodb');//para convertir los string a objectId 
+
+app.get("/", function(req, res){
+    comanda.find({}).exec(function(error, platos){
+        res.send(platos);
+    });
+});
+
 app.post('/', async function (req, res){
     const {mesa} = req.body;
     console.log("Cargando los platos de la mesa "+ mesa);
@@ -33,7 +41,6 @@ app.put('/:idPlato/:op', function(req, res){
         platos.forEach(plato => {
             console.log(plato._id + " " + id);
             if(plato._id==id){
-                console.log("**************************************************" + op);
                 if(op=="+") plato.proceso = plato.proceso + 1;
                 else plato.proceso = plato.proceso - 1;
                 plato.save();
@@ -42,6 +49,38 @@ app.put('/:idPlato/:op', function(req, res){
         });
     })
 })
+
+
+
+
+ app.put('/nueva', function(req, res){
+    const {primeros, segundos, postres, bebidas, mesa} = req.body;
+
+    mesaOcupada(mesa);
+
+    primeros.forEach(plato => {
+        const servicio = new comanda({_id: null, mesa: new ObjectID(mesa._id), plato: new ObjectID(plato._id), proceso: 0});
+        servicio.save();
+    });
+
+    segundos.forEach(plato => {
+        const servicio = new comanda({_id: null, mesa: new ObjectID(mesa._id), plato: new ObjectID(plato._id), proceso: 0});
+        servicio.save();
+    });
+
+    postres.forEach(plato => {
+        const servicio = new comanda({_id: null, mesa: new ObjectID(mesa._id), plato: new ObjectID(plato._id), proceso: 0});
+        servicio.save();
+    });
+
+    bebidas.forEach(plato => {
+        const servicio = new comanda({_id: null, mesa: new ObjectID(mesa._id), plato: new ObjectID(plato._id), proceso: 0});
+        servicio.save();
+    });
+    res.send(primeros);
+});
+
+
 
 async function buscaComanda(idMesa){
     console.log("buscando los platos de la comanda");
@@ -86,4 +125,17 @@ async function buscaPlatos(id){
     });
     return promesa; 
 } 
+
+function mesaOcupada(mesaOcupada){
+    mesas.find({
+    }).exec(function(error, mesa){
+        mesa.forEach(element => {
+            if(element.numero == mesaOcupada.numero){
+                element.libre = false;
+                element.save();
+            }
+        });
+
+    });
+}
 module.exports = app;

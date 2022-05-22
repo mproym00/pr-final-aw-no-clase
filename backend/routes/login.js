@@ -17,11 +17,14 @@ app.post('/', function (req, res){
             throw error;
         }
 
+        console.log(usuarios);
+
         const response = {
             user: usuarios[0].user,
             type: usuarios[0].type,
             administrator: usuarios[0].administrator
         }
+
         res.send(response);
     });
 });

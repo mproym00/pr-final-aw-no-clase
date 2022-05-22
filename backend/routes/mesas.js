@@ -14,15 +14,10 @@ app.post('/', async function (req, res){
    else{
       console.log("Cocinero: " + usu);
    }
-   const mesas = await extraeMesas(usu);
+   const mesas = await buscaMesas(usu);
    console.log(mesas);
    res.send(mesas);
 });
-
-async function extraeMesas(usu){
-   var mesas = await buscaMesas(usu);
-   return mesas;
-}
 
 async function buscaMesas(id){
    console.log("recopilando información de las mesas para: " + id);
@@ -42,6 +37,17 @@ app.get('/platos', async function (req, res){
    console.log("Cargando los platos ofrecidos");
    const platos = await extraePlatos();
    res.send(platos);
+});
+
+app.put('/:mesa', async function (req, res){
+   const nMesa = req.params.mesa;
+   console.log("Buscando la mesa " + nMesa);
+   mesas.find({
+      numero: nMesa
+   }).exec(function (error, mesa){
+      console.log(mesa);
+      res.send(mesa);
+   })
 });
 
 async function extraePlatos(){

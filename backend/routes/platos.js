@@ -34,12 +34,5 @@ app.get('/bebidas', async function (req, res){
    });
 });
 
-app.post('/comanda', function(req, res){
-   console.log("***************************" + req);
-   const {primeros, segundos, postres, bebidas} = req.body;
-   console.log(primeros);
-   res.send("    ");
-});
-
 
 module.exports = app;
