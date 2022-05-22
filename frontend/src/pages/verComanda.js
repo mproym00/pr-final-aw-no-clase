@@ -1,38 +1,38 @@
-import * as React from 'react';
+import * as React from `react`;
 import {
   useEffect,
   useState,
-} from 'react';
+} from `react`;
 
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from `axios`;
+import { useNavigate } from `react-router-dom`;
 
-import BoyIcon from '@mui/icons-material/Boy';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import BoyIcon from `@mui/icons-material/Boy`;
+import AppBar from `@mui/material/AppBar`;
+import Box from `@mui/material/Box`;
+import Button from `@mui/material/Button`;
+import Container from `@mui/material/Container`;
+import CssBaseline from `@mui/material/CssBaseline`;
+import Grid from `@mui/material/Grid`;
+import Link from `@mui/material/Link`;
 import {
   createTheme,
   ThemeProvider,
-} from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+} from `@mui/material/styles`;
+import Toolbar from `@mui/material/Toolbar`;
+import Typography from `@mui/material/Typography`;
 
-import Component from '../components/platoComanda';
+import Component from `../components/platoComanda`;
 
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
-            {'Copyright © '}
+            {`Copyright © `}
             <Link color="inherit" href="https://mui.com/">
                 www.grupoInnova6d.com
-            </Link>{' '}
+            </Link>{` `}
             {new Date().getFullYear()}
-            {'.'}
+            {`.`}
         </Typography>
     );
 }
@@ -42,9 +42,9 @@ const theme = createTheme();
 export default function Comanda() {
 
     const navigate = useNavigate();
-    const camarero = sessionStorage.getItem('usuario');
+    const camarero = sessionStorage.getItem(`usuario`);
 
-    var url = `http://localhost:3053/${camarero}`;
+    var url = `/api/${camarero}`;
 
     var mesa = sessionStorage.getItem("mesa");
 
@@ -158,7 +158,7 @@ export default function Comanda() {
                 </Toolbar>
             </AppBar>
             <main>
-                <Box sx={{bgcolor: 'background.paper', pt: 8, pb: 6}}>
+                <Box sx={{bgcolor: `background.paper`, pt: 8, pb: 6}}>
                     <Container maxWidth="md">
                         <Typography
                             component="h1"
@@ -296,7 +296,7 @@ export default function Comanda() {
                     </Container>
                 </Box>
             </main>
-            <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+            <Box sx={{ bgcolor: `background.paper`, p: 6 }} component="footer">
                 <Typography variant="h6" align="center" gutterBottom>
                 </Typography>
                 <Typography

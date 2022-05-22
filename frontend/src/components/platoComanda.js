@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from `react`;
 
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import Button from `@mui/material/Button`;
+import Card from `@mui/material/Card`;
+import CardContent from `@mui/material/CardContent`;
+import Container from `@mui/material/Container`;
+import Grid from `@mui/material/Grid`;
+import Typography from `@mui/material/Typography`;
 
 export default function Mesa(argumentos) {
 
@@ -15,7 +15,7 @@ export default function Mesa(argumentos) {
         if(argumentos.estado==="yellow") entregar=true;
         return (
             (entregar) ? 
-                <Container sx={{display: 'flex', flexDirection: 'colum'}}>
+                <Container sx={{display: `flex`, flexDirection: `colum`}}>
                     <Typography
                         component="h1"
                         variant="h6"
@@ -27,7 +27,7 @@ export default function Mesa(argumentos) {
                         {argumentos.nombrePlato}
                     </Typography>
                     <Grid container justifyContent="flex-end"> 
-                        <Button sx={{color: 'black', width: '100', margin:"normal"}} 
+                        <Button sx={{color: `black`, width: `100`, margin:"normal"}} 
                             onClick={() => {
                                 argumentos.servido(argumentos.posicion, argumentos.tipo);
 
@@ -37,7 +37,7 @@ export default function Mesa(argumentos) {
                     </Grid>
                 </Container>
             :   
-            <Container sx={{display: 'flex', flexDirection: 'colum'}}>
+            <Container sx={{display: `flex`, flexDirection: `colum`}}>
                 <Typography
                     component="h1"
                     variant="h6"
@@ -48,7 +48,7 @@ export default function Mesa(argumentos) {
                     {argumentos.nombrePlato}
                 </Typography>
                 <Grid container justifyContent="flex-end"> 
-                    <Button sx={{color: 'black', width: '100', margin:"normal"}} 
+                    <Button sx={{color: `black`, width: `100`, margin:"normal"}} 
                         onClick={() => {
                             argumentos.dservido(argumentos.posicion, argumentos.tipo);
                         }} 
@@ -61,9 +61,9 @@ export default function Mesa(argumentos) {
 
     return (      
         <Card
-            sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: argumentos.estado}}
+            sx={{ height: `100%`, display: `flex`, flexDirection: `column`, bgcolor: argumentos.estado}}
         >
-            <CardContent sx={{ flexGrow: 1, color: 'white'}}>   
+            <CardContent sx={{ flexGrow: 1, color: `white`}}>   
                 {proceso()}
             </CardContent>
         </Card>

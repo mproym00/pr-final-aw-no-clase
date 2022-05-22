@@ -1,8 +1,8 @@
-const exp = require('express');
+const exp = require(`express`);
 var app = exp.Router();
-const baseDatos = require('../models/user');
+const baseDatos = require(`../models/user`);
 
-app.get('/', function (req, res){
+app.get(`/api`, function (req, res){
     console.log("Todos los usuarios");
     baseDatos.find({}).exec(function(error, usuarios){
         if(error){

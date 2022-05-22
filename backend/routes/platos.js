@@ -1,8 +1,8 @@
-const exp = require('express');
+const exp = require(`express`);
 var app = exp.Router();
-const platos = require('../models/platos');
+const platos = require(`../models/platos`);
 
-app.get('/primeros', async function (req, res){
+app.get(`/api/primeros`, async function (req, res){
    platos.find({
       tipo: "Primero"
    }).exec(function(error, platos){
@@ -10,7 +10,7 @@ app.get('/primeros', async function (req, res){
    });
 });
 
-app.get('/segundos', async function (req, res){
+app.get(`/api/segundos`, async function (req, res){
    platos.find({
       tipo: "Segundo"
    }).exec(function(error, platos){
@@ -18,7 +18,7 @@ app.get('/segundos', async function (req, res){
    });
 });
 
-app.get('/postres', async function (req, res){
+app.get(`/api/postres`, async function (req, res){
    platos.find({
       tipo: "Postre"
    }).exec(function(error, platos){
@@ -26,7 +26,7 @@ app.get('/postres', async function (req, res){
    });
 });
 
-app.get('/bebidas', async function (req, res){
+app.get(`/api/bebidas`, async function (req, res){
    platos.find({
       tipo: "Bebida"
    }).exec(function(error, platos){

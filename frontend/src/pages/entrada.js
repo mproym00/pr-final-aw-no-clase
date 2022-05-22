@@ -1,16 +1,16 @@
-import React from 'react';
+import React from `react`;
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from `react-router-dom`;
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
+import Box from `@mui/material/Box`;
+import Button from `@mui/material/Button`;
+import Container from `@mui/material/Container`;
+import CssBaseline from `@mui/material/CssBaseline`;
 import {
   createTheme,
   ThemeProvider,
-} from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+} from `@mui/material/styles`;
+import Typography from `@mui/material/Typography`;
 
 const theme = createTheme();
 
@@ -20,7 +20,7 @@ const navigate = useNavigate();
 const fondo = require("../fotos/comedor.jpg");
 
   const HandleSubmit = () => {
-      navigate('/login');    
+      navigate(`/api/login`);    
   };
 
   return (
@@ -31,9 +31,9 @@ const fondo = require("../fotos/comedor.jpg");
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: `flex`,
+            flexDirection: `column`,
+            alignItems: `center`,
           }}
         >
           

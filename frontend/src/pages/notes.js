@@ -1,28 +1,28 @@
-import * as React from 'react';
+import * as React from `react`;
 
-import { useState, useEffect } from 'react';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
+import { useState, useEffect } from `react`;
+import CameraIcon from `@mui/icons-material/PhotoCamera`;
+import AppBar from `@mui/material/AppBar`;
+import Box from `@mui/material/Box`;
+import Container from `@mui/material/Container`;
+import CssBaseline from `@mui/material/CssBaseline`;
+import Grid from `@mui/material/Grid`;
+import Link from `@mui/material/Link`;
+import Stack from `@mui/material/Stack`;
 import {
   createTheme,
   ThemeProvider,
-} from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Component from '../components/Tarjeta'
-import Button from '@mui/material/Button';
+} from `@mui/material/styles`;
+import Toolbar from `@mui/material/Toolbar`;
+import Typography from `@mui/material/Typography`;
+import Component from `../components/Tarjeta`
+import Button from `@mui/material/Button`;
 
 
 const theme = createTheme();
 
 export default function Notes() {
-    const correo = sessionStorage.getItem('correo');
+    const correo = sessionStorage.getItem(`correo`);
     const [card, setCard] = useState([
         {
             title: "Nota 1",
@@ -32,7 +32,7 @@ export default function Notes() {
     var signa;
     var tura;
     var lista;
-    var axios=require('axios');
+    var axios=require(`axios`);
     var url = `/api/${correo}/notes`;
     useEffect(() =>{
       cargarOriginales();
@@ -54,11 +54,11 @@ export default function Notes() {
     }
 
     function nueva(){
-        signa = getPrompt('Título de la nota', 'Nota ejemplo');
-        tura = getPrompt('Cuerpo del texto', 'Lo que necesite escribir');
+        signa = getPrompt(`Título de la nota`, `Nota ejemplo`);
+        tura = getPrompt(`Cuerpo del texto`, `Lo que necesite escribir`);
         lista = getLista();
-        if(signa==='Nota ejemplo' || tura==='Lo que necesite escribir'){
-            alert('Falta una parte de la nota');
+        if(signa===`Nota ejemplo` || tura===`Lo que necesite escribir`){
+            alert(`Falta una parte de la nota`);
         }else{
             axios.post(url, {
               title: signa,
@@ -84,11 +84,11 @@ export default function Notes() {
     }
 
 
-    signa = 'hola';
-    tura = 'esto es una prueba';
+    signa = `hola`;
+    tura = `esto es una prueba`;
     function edit(index){
-        signa = getPrompt('Título de la nota', card[index].title);
-        tura = getPrompt('Cuerpo del texto', card[index].description);
+        signa = getPrompt(`Título de la nota`, card[index].title);
+        tura = getPrompt(`Cuerpo del texto`, card[index].description);
         lista = getLista();
         axios.put(`${url}/${lista[index].title}`, {
           title: signa,
@@ -111,7 +111,7 @@ export default function Notes() {
       <main>
         <Box
           sx={{
-            bgcolor: 'background.paper',
+            bgcolor: `background.paper`,
             pt: 8,
             pb: 6,
           }}
@@ -128,7 +128,7 @@ export default function Notes() {
               <br/>
             <Button
                 size="large"
-                align='center'
+                align="center"
                 onClick={nueva}
                 >
                 Añadir Nota

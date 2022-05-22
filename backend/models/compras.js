@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require(`mongoose`);
 
 const nuevoIngrediente = new mongoose.Schema({
     nombre: String,
@@ -6,6 +6,6 @@ const nuevoIngrediente = new mongoose.Schema({
     alergenos: String
 });
 
-const Objeto = mongoose.model('nuevoIngrediente', nuevoIngrediente);
+const Objeto = mongoose.model(`nuevoIngrediente`, nuevoIngrediente);
 
 module.exports = Objeto;

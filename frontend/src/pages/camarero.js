@@ -1,39 +1,39 @@
-import * as React from 'react';
+import * as React from `react`;
 import {
   useEffect,
   useState,
-} from 'react';
+} from `react`;
 
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from `axios`;
+import { useNavigate } from `react-router-dom`;
 
-import BoyIcon from '@mui/icons-material/Boy';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
+import BoyIcon from `@mui/icons-material/Boy`;
+import AppBar from `@mui/material/AppBar`;
+import Box from `@mui/material/Box`;
+import Button from `@mui/material/Button`;
+import Container from `@mui/material/Container`;
+import CssBaseline from `@mui/material/CssBaseline`;
+import Grid from `@mui/material/Grid`;
+import Link from `@mui/material/Link`;
+import Stack from `@mui/material/Stack`;
 import {
   createTheme,
   ThemeProvider,
-} from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+} from `@mui/material/styles`;
+import Toolbar from `@mui/material/Toolbar`;
+import Typography from `@mui/material/Typography`;
 
-import Component from '../components/mesa';
+import Component from `../components/mesa`;
 
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
-            {'Copyright © '}
+            {`Copyright © `}
             <Link color="inherit" href="https://mui.com/">
               www.grupoInnova6d.com
-            </Link>{' '}
+            </Link>{` `}
             {new Date().getFullYear()}
-            {'.'}
+            {`.`}
       </Typography>
   );
 }
@@ -41,11 +41,11 @@ function Copyright() {
 const theme = createTheme();
 
 export default function Album() {
-    const camarero = sessionStorage.getItem('usuario');
+    const camarero = sessionStorage.getItem(`usuario`);
     const [cardMesas, setCard]=useState([]);
     const [admin, setAdmin]=useState([]);
 
-    var url = `http://localhost:3053/${camarero}/mesas`;
+    var url = `/api/${camarero}/mesas`;
 
     var mesas;
     const navigate = useNavigate();
@@ -83,16 +83,16 @@ export default function Album() {
 
     function tomarComanda(nMesa){
         sessionStorage.setItem("mesa", nMesa);
-        navigate('/'+camarero+'/comanda/'+nMesa);
+        navigate(`/api/${camarero}/comanda/${nMesa}`);
     }
 
     function verComanda(nMesa){
         sessionStorage.setItem("mesa", nMesa);
-        navigate('/'+camarero+'/verComanda/'+nMesa);
+        navigate(`/api/${camarero}/verComanda/${nMesa}`);
     }
 
     async function borrarComanda(nMesa){
-        axios.post('http://localhost:3053/'+camarero+'/liberar', {
+        axios.post(`/api/${camarero}/liberar`, {
             mesa: nMesa,
         }).then(response =>{
             alert("Mesa " + nMesa + " queda libre");
@@ -110,18 +110,18 @@ export default function Album() {
     function salir(){
         sessionStorage.removeItem("admin");
         sessionStorage.removeItem("usuario");
-        navigate('/login');
+        navigate(`/api/login`);
     }
 
     function administrar(){
-        navigate('/'+camarero+'/admin');
+        navigate(`/api/`+camarero+`/admin`);
     }
 
     function administrador(){
          return (
             (admin) ? 
                 <Button variant="contained" 
-                    sx={{color: 'white', width: '50'}} 
+                    sx={{color: `white`, width: `50`}} 
                     bqColor= "red" 
                     onClick={() => {
                         administrar()
@@ -164,7 +164,7 @@ export default function Album() {
               {/* Hero unit */}
               <Box
                   sx={{
-                      bgcolor: 'background.paper',
+                      bgcolor: `background.paper`,
                       pt: 8,
                       pb: 6,
                   }}
@@ -189,7 +189,7 @@ export default function Album() {
                       </Stack>
                   </Container>
             </Box>
-            <Container sx={{ py: 8, bgcolor: 'cyan' }} maxWidth="md">
+            <Container sx={{ py: 8, bgcolor: `cyan` }} maxWidth="md">
                 <Grid container spacing={4}>
                     {cardMesas.map((card, index) => (
                         <Grid item key={index} xs={12} sm={6} md={4}>
@@ -207,7 +207,7 @@ export default function Album() {
             </Container>
           </main>
               {/* Footer */}
-              <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+              <Box sx={{ bgcolor: `background.paper`, p: 6 }} component="footer">
                   <Typography variant="h6" align="center" gutterBottom>
                   </Typography>
                   <Typography

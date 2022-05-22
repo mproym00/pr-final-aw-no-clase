@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require(`mongoose`);
 
 const mesa = new mongoose.Schema({
     _id: Object,
@@ -6,6 +6,6 @@ const mesa = new mongoose.Schema({
     libre: Boolean,
 });
 
-const Objeto = mongoose.model('mesa', mesa);
+const Objeto = mongoose.model(`mesa`, mesa);
 
 module.exports = Objeto;

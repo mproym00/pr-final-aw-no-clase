@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require(`mongoose`);
 
 const platos = new mongoose.Schema({
     _id: Object,
@@ -9,6 +9,6 @@ const platos = new mongoose.Schema({
     tipo: String,
 });
 
-const Objeto = mongoose.model('platos', platos);
+const Objeto = mongoose.model(`platos`, platos);
 
 module.exports = Objeto;

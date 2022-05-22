@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { useState } from 'react';
+import * as React from `react`;
+import { useState } from `react`;
 
-import { Typography } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import { Typography } from `@mui/material`;
+import Card from `@mui/material/Card`;
+import CardActions from `@mui/material/CardActions`;
+import CardContent from `@mui/material/CardContent`;
 
-import styles from './card.module.css';
-import Component from './platoComanda';
+import styles from `./card.module.css`;
+import Component from `./platoComanda`;
 
 export default function Mesa(argumentos) {
     const [primeros, setPrimeros] = useState([]);
@@ -21,7 +21,7 @@ export default function Mesa(argumentos) {
 
     return (        
         <Card
-            sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: argumentos.color}}
+            sx={{ height: `100%`, display: `flex`, flexDirection: `column`, bgcolor: argumentos.color}}
         >
             <CardContent sx={{ flexGrow: 1 }}> 
                 <Typography className={styles.NMesa}>PRIMEROS {argumentos.mesa} </Typography>

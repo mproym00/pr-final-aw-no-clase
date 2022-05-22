@@ -1,18 +1,18 @@
-import * as React from 'react';
+import * as React from `react`;
 import {
   useEffect,
   useState,
-} from 'react';
+} from `react`;
 
-import axios from 'axios';
-import Grid from '@mui/material/Grid';
-import Autocomplete from '@mui/material/Autocomplete';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CheckBox from '@mui/material/Checkbox';
-import Container from '@mui/material/Container';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import TextField from '@mui/material/TextField';
+import axios from `axios`;
+import Grid from `@mui/material/Grid`;
+import Autocomplete from `@mui/material/Autocomplete`;
+import Card from `@mui/material/Card`;
+import CardContent from `@mui/material/CardContent`;
+import CheckBox from `@mui/material/Checkbox`;
+import Container from `@mui/material/Container`;
+import FormControlLabel from `@mui/material/FormControlLabel`;
+import TextField from `@mui/material/TextField`;
 
 export default function Mesa(argumentos) {
     const [ingredientes, setIngredientes]=useState([]);
@@ -27,7 +27,7 @@ export default function Mesa(argumentos) {
 
 
     function cargarIngredientes(){
-        axios.get(`http://localhost:3053/ingredientes`, {}).then((response) => {
+        axios.get(`/api/ingredientes`, {}).then((response) => {
             var lista = [];
             var listaCompleta = [];
             response.data.forEach(element => {
@@ -66,7 +66,7 @@ export default function Mesa(argumentos) {
                 />
             </Grid>
             <Grid item xs={12} sm={6}>
-                <TextField xs={12} sm={6} fullWidth required label='Cantidad' type="number" id="cantidad" name="cantidad" />
+                <TextField xs={12} sm={6} fullWidth required label=`Cantidad` type="number" id="cantidad" name="cantidad" />
             </Grid>
         </Grid>
     );

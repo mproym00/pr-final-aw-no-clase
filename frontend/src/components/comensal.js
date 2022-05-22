@@ -1,20 +1,20 @@
-import * as React from 'react';
+import * as React from `react`;
 import {
   useEffect,
   useState,
-} from 'react';
+} from `react`;
 
-import axios from 'axios';
+import axios from `axios`;
 
-import { Typography } from '@mui/material';
-import Autocomplete from '@mui/material/Autocomplete';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
+import { Typography } from `@mui/material`;
+import Autocomplete from `@mui/material/Autocomplete`;
+import Card from `@mui/material/Card`;
+import CardContent from `@mui/material/CardContent`;
+import Container from `@mui/material/Container`;
+import Grid from `@mui/material/Grid`;
+import TextField from `@mui/material/TextField`;
 
-import m from '../fotos/EsperandoMini.png';
+import m from `../fotos/EsperandoMini.png`;
 
 export default function Mesa(argumentos) {
     const [primeros, setPrimeros]=useState([]);
@@ -40,7 +40,7 @@ export default function Mesa(argumentos) {
     }, []);
 
     function cargarPlatos(){
-        axios.get(`http://localhost:3053/platos/primeros`, {}).then((response) => {
+        axios.get(`/api/platos/primeros`, {}).then((response) => {
             var lista = [];
             var listaCompleta = [];
             response.data.forEach(element => {
@@ -51,7 +51,7 @@ export default function Mesa(argumentos) {
             setPrimerosCompletos(listaCompleta);
         });
 
-        axios.get(`http://localhost:3053/platos/segundos`, {}).then((response) => {
+        axios.get(`/api/platos/segundos`, {}).then((response) => {
             var lista = [];
             var listaCompleta = [];
             response.data.forEach(element => {
@@ -62,7 +62,7 @@ export default function Mesa(argumentos) {
             setSegundosCompletos(listaCompleta);
         });
 
-        axios.get(`http://localhost:3053/platos/postres`, {}).then((response) => {
+        axios.get(`/api/platos/postres`, {}).then((response) => {
             var lista = [];
             var listaCompleta = [];
             response.data.forEach(element => {
@@ -73,7 +73,7 @@ export default function Mesa(argumentos) {
             setPostresCompletos(listaCompleta);
         });
 
-        axios.get(`http://localhost:3053/platos/bebidas`, {}).then((response) => {
+        axios.get(`/api/platos/bebidas`, {}).then((response) => {
             var lista = [];
             var listaCompleta = [];
             response.data.forEach(element => {
@@ -121,7 +121,7 @@ export default function Mesa(argumentos) {
 
     return (        
     <Card
-        sx={{height: '100%', display: 'flex', flexDirection: 'column'}} spacing={1}
+        sx={{height: `100%`, display: `flex`, flexDirection: `column`}} spacing={1}
     >
         <CardContent sx={{ flexGrow: 1 }} > 
             <Container
@@ -197,7 +197,7 @@ export default function Mesa(argumentos) {
                     id="aclaraciones"
                     />
 
-                    <Typography align='center'> Pan incluido</Typography>
+                    <Typography align=`center`> Pan incluido</Typography>
                 </Grid>
             </Container>
 

@@ -1,18 +1,18 @@
-const exp = require('express');
+const exp = require(`express`);
 var app = exp.Router();
-const mesas = require('../models/mesas');
-const platos = require('../models/platos');
-const comanda = require('../models/comandas');
+const mesas = require(`../models/mesas`);
+const platos = require(`../models/platos`);
+const comanda = require(`../models/comandas`);
 
-const {ObjectID} = require('mongodb');//para convertir los string a objectId 
+const {ObjectID} = require(`mongodb`);//para convertir los string a objectId 
 
-app.get("/", function(req, res){
+app.get("/api", function(req, res){
     comanda.find({}).exec(function(error, platos){
         res.send(platos);
     });
 });
 
-app.post('/', async function (req, res){
+app.post(`/api/`, async function (req, res){
     const {mesa} = req.body;
     console.log("Cargando los platos de la mesa "+ mesa);
     var idMesa = await buscaMesa(mesa);
@@ -29,7 +29,7 @@ app.post('/', async function (req, res){
     res.send(listaPlatos);
 });
 
-app.put('/:idPlato/:op', function(req, res){
+app.put(`/api/:idPlato/:op`, function(req, res){
     var id = req.params.idPlato;
     var op = req.params.op;
     console.log(id);
@@ -53,7 +53,7 @@ app.put('/:idPlato/:op', function(req, res){
 
 
 
- app.put('/nueva', function(req, res){
+ app.put(`/api/nueva`, function(req, res){
     const {primeros, segundos, postres, bebidas, mesa} = req.body;
 
     mesaOcupada(mesa);

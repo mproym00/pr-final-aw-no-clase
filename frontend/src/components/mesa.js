@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from `react`;
 
-import { Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import { Typography } from `@mui/material`;
+import Button from `@mui/material/Button`;
+import Card from `@mui/material/Card`;
+import CardActions from `@mui/material/CardActions`;
+import CardContent from `@mui/material/CardContent`;
 
-import m from '../fotos/Mesa.png';
-import styles from './card.module.css';
+import m from `../fotos/Mesa.png`;
+import styles from `./card.module.css`;
 
 export default function Mesa(argumentos) {
     function verComanda(color){
@@ -15,14 +15,14 @@ export default function Mesa(argumentos) {
         if(color==="darkred") tomarComanda=false;
         return (
             (tomarComanda) ? 
-                <Button sx={{color: 'white', width: '50'}} 
+                <Button sx={{color: `white`, width: `50`}} 
                     onClick={() => {
                         argumentos.comanda(argumentos.mesa, 1);
                     }} 
                     variant="contained">Tomar comanda
                 </Button>  
             :   
-                <Button sx={{color: 'white', width: '50'}} 
+                <Button sx={{color: `white`, width: `50`}} 
                     onClick={() => {
                         argumentos.comanda(argumentos.mesa, 2);
                     }} 
@@ -33,7 +33,7 @@ export default function Mesa(argumentos) {
 
     return (        
         <Card
-            sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: argumentos.color}}
+            sx={{ height: `100%`, display: `flex`, flexDirection: `column`, bgcolor: argumentos.color}}
         >
             <CardContent sx={{ flexGrow: 1 }}> 
                 <img src={m} alt="Mesa"  className={styles.foto}/>
@@ -42,7 +42,7 @@ export default function Mesa(argumentos) {
             </CardContent>
             <CardActions className={styles.botones}>
                 {verComanda(argumentos.color)}
-                <Button sx={{color: 'white', width: '50'}} variant="contained" onClick={() => {
+                <Button sx={{color: `white`, width: `50`}} variant="contained" onClick={() => {
                         argumentos.comanda(argumentos.mesa, 3);
                     }} >Mesa libre</Button>
             </CardActions>

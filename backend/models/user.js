@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require(`mongoose`);
 
 const user = new mongoose.Schema({
     _id: Object,
@@ -8,6 +8,6 @@ const user = new mongoose.Schema({
     administrator: Boolean
 });
 
-const Objeto = mongoose.model('users', user);
+const Objeto = mongoose.model(`users`, user);
 
 module.exports = Objeto;

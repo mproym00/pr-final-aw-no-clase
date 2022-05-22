@@ -1,9 +1,9 @@
-const exp = require('express');
+const exp = require(`express`);
 var app = exp.Router();
-const mesas = require('../models/mesas');
-const comanda = require('../models/comandas');
+const mesas = require(`../models/mesas`);
+const comanda = require(`../models/comandas`);
 
-app.post('/', async function (req, res){
+app.post(`/api`, async function (req, res){
     const {mesa} = req.body;
     console.log("Liberando la mesa: " + mesa);
     const mesaEncontrada = await buscaMesa(mesa);

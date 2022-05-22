@@ -1,4 +1,4 @@
-const direction = require('./default.json');
+const direction = require(`./default.json`);
 
 function get(){
     return direction.connection;

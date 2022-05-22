@@ -1,10 +1,10 @@
-const exp = require('express');
-const hashMode = require('blueimp-md5/js/md5.min.js');
+const exp = require(`express`);
+const hashMode = require(`blueimp-md5/js/md5.min.js`);
 
 var app = exp.Router();
-const usuario = require('../models/user');
+const usuario = require(`../models/user`);
 
-app.post('/', function (req, res){
+app.post(`/api`, function (req, res){
     const {user, password} = req.body;
     console.log(password);
     const hash = hashMode(password);
