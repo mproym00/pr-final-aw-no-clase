@@ -19,7 +19,7 @@ async function buscaMesa(limpiar){
           numero: limpiar
        }).exec(function(error, mesaEncontrada){
           if(error){
-             throw error;
+              throw error;
           }
           resolve(this.id=mesaEncontrada[0]);
        })

@@ -19,6 +19,7 @@ app.use('/platos', require('./routes/platos'));
 app.use('/:camarero/comandas/modificar/:idPlato/:op', require('./routes/comandas'));
 app.use('/:camarero/comandas', require('./routes/comandas'));
 app.use('/:camarero/liberar', require('./routes/liberarMesa'));
+app.use('/ingredientes', require('./routes/ingredientes'));
 
 if(process.env.NODE_ENV === "production"){
     app.use(express.static("../frontend/build"));
