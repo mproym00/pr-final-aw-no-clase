@@ -124,7 +124,8 @@ export default function App() {
                             <Container>
                                 <Grid>
                                     {cardIngredientes.map((card, index) => (
-                                        <Grid item key={index} xs={12} >
+                                        <Grid item key={index} xs={12} mt={1} >
+
                                             <Component 
 
                                             />
