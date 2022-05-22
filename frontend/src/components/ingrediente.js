@@ -49,8 +49,8 @@ export default function Mesa(argumentos) {
 
     
 
-    return (        
-        <Grid container spacing={2}>
+    return (
+        <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
                 <Autocomplete
                     fullWidth
@@ -58,7 +58,7 @@ export default function Mesa(argumentos) {
                     autoHighlight
                     value={seleccionIngrediente}
                     inputValue={seleccionIngrediente}
-                    onChange={(event, ingrediente) => {
+                    onClick={(event, ingrediente) => {
                         setSeleccionIngrediente(ingrediente);
                         ingredienteseleccionIngredientes(ingrediente);
                     }}
@@ -66,11 +66,7 @@ export default function Mesa(argumentos) {
                 />
             </Grid>
             <Grid item xs={12} sm={6}>
-                <Autocomplete
-                fullWidth
-                label="Cantidad"
-                renderInput={(params) => <TextField {...params} label='Cantidad'/>}
-                />
+                <TextField xs={12} sm={6} fullWidth required label='Cantidad' type="number" id="cantidad" name="cantidad" />
             </Grid>
         </Grid>
     );
